@@ -1,0 +1,7 @@
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\obj\Debug\Totito_Programacion1.csproj.AssemblyReference.cache
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\obj\Debug\Totito_Programacion1.csproj.CoreCompileInputs.cache
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\bin\Debug\Totito_Programacion1.exe.config
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\bin\Debug\Totito_Programacion1.exe
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\bin\Debug\Totito_Programacion1.pdb
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\obj\Debug\Totito_Programacion1.exe
+C:\Users\eyuman\source\repos\Totito_Programacion1\Totito_Programacion1\obj\Debug\Totito_Programacion1.pdb
