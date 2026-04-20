@@ -29,6 +29,9 @@ namespace Totito_Programacion1
             String fichaActual, j1 = "X", j2 = "O";
             String nombreJ1 = "Player 1", nombreJ2 = "Player 2";
             String jugadorEnTurno;
+            int Contador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
+            Boolean hayGanador = false;
+            Boolean cambiarJugador;
 
             //datos de los jugadores
             Console.WriteLine("Ingrese el nombre del primer jugador");
@@ -38,134 +41,162 @@ namespace Totito_Programacion1
 
             jugadorEnTurno = nombreJ1;
 
-            //Marcar la ficha que esta en juego j1 = X j2 = O
-            fichaActual = jugadorEnTurno.Equals(nombreJ1) ? j1 : j2;
-
-            Console.WriteLine($"ingrese la posicion n para el jugador {jugadorEnTurno}");
-
-            posicion = Console.ReadLine();
-
-            switch (posicion)
+            while (!hayGanador)
             {
-                case "1":
+                cambiarJugador = true;
+                //Marcar la ficha que esta en juego j1 = X j2 = O
+                fichaActual = jugadorEnTurno.Equals(nombreJ1) ? j1 : j2;
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "2":
+                Console.WriteLine($"Es el turno de {jugadorEnTurno}");
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "3":
+                posicion = Console.ReadLine();
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "4":
+                switch (posicion)
+                {
+                    case "1":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "5":
+                        if (p1.Equals(" "))
+                        {
+                            p1 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "2":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "6":
+                        if (p2.Equals(" "))
+                        {
+                            p2 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "3":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "7":
+                        if (p3.Equals(" "))
+                        {
+                            p3 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "4":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "8":
+                        if (p4.Equals(" "))
+                        {
+                            p4 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "5":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
-                case "9":
+                        if (p5.Equals(" "))
+                        {
+                            p5 = fichaActual;
+                        }
+                        else
+                        {
+                           
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "6":
 
-                    if (p1.Equals(" "))
-                    {
-                        p1 = fichaActual;
-                    }
-                    else
-                    {
-                        Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
-                    }
-                    break;
+                        if (p6.Equals(" "))
+                        {
+                            p6 = fichaActual;
+                        }
+                        else
+                        {
+                           
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "7":
 
-                default:
-                    Console.WriteLine("El dato ingresado no es una posicion valida");
-                    break;
+                        if (p7.Equals(" "))
+                        {
+                            p7 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "8":
+
+                        if (p8.Equals(" "))
+                        {
+                            p8 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+                    case "9":
+
+                        if (p9.Equals(" "))
+                        {
+                            p9 = fichaActual;
+                        }
+                        else
+                        {
+                            
+                            cambiarJugador = false;
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("El dato ingresado no es una posicion valida");
+                        break;
+                }
+                if (cambiarJugador) { //si se cambia de jugador entonces que se muestre el tablero con los ultimos ingresos
+                    tablero = ($"╔═╦═╦═╗" +
+                        $"\n║{p7}║{p8}║{p9}║" +
+                        $"\n╠═╠═╠═╣" +
+                        $"\n║{p4}║{p5}║{p6}║" +
+                        $"\n╠═╠═╠═╣" +
+                        $"\n║{p1}║{p2}║{p3}║" +
+                        $"\n╚═╩═╩═╝");
+                    Contador++;
+                    if (Contador == 9)
+                    {
+                        hayGanador = true;
+                     }
+
+                    jugadorEnTurno = jugadorEnTurno.Equals(nombreJ1) ? nombreJ2 : nombreJ1;
+                    Console.WriteLine(tablero);
+
+                }
+                else
+                {
+                    Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
+                }
+                    // Console.Clear();
+
+
+                    Console.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
+                Console.ReadKey();
             }
+
+
             
-            tablero = ($"╔═╦═╦═╗" +
-                $"\n║{p7}║{p8}║{p9}║" +
-                $"\n╠═╠═╠═╣" +
-                $"\n║{p4}║{p5}║{p6}║" +
-                $"\n╠═╠═╠═╣" +
-                $"\n║{p1}║{p2}║{p3}║" +
-                $"\n╚═╩═╩═╝");
-
-            Console.WriteLine(tablero);
-
-            jugadorEnTurno = jugadorEnTurno.Equals(nombreJ1) ? nombreJ2 : nombreJ1;
-
-
-            Console.Clear();
         }
     }
 }
