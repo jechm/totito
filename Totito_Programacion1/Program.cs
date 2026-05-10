@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Totito_Programacion1
 {
     internal class Program
     {
         static void Main(string[] args)
-        { 
-            /*para el tablero
+        {
+            /*para el strTablero
              * Alt 185  ╣
              * Alt 186 ║
              * Alt 187  ╗
@@ -24,179 +20,187 @@ namespace Totito_Programacion1
              * Alt 206 ╬ 
              */
             Console.WriteLine("Totito");
-            String posicion;
-            String tablero, p1 = " ", p2 = " ", p3 = " ", p4 = " ", p5 = " ", p6 = " ", p7 = " ", p8 = " ", p9=" ";
-            String fichaActual, j1 = "X", j2 = "O";
-            String nombreJ1 = "Player 1", nombreJ2 = "Player 2";
-            String jugadorEnTurno;
-            int Contador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
-            Boolean hayGanador = false;
-            Boolean cambiarJugador;
+            String strPosicion;
+            String strTablero, strPosicion1 = " ", strPosicion2 = " ", strPosicion3 = " ", strPosicion4 = " ", strPosicion5 = " ", strPosicion6 = " ", strPosicion7 = " ", strPosicion8 = " ", strPosicion9 = " ";
+            String strFichaActual, strJugador1 = "X", strJugador2 = "O";
+            String strNombreJugador1 = "Player 1", strNombreJugador2 = "Player 2";
+            String strJugadorEnTurno;
+            int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
+            Boolean boolHayGanador = false;
+            Boolean boolCambiarJugador=false;
 
             //datos de los jugadores
             Console.WriteLine("Ingrese el nombre del primer jugador");
-            nombreJ1 = Console.ReadLine();
+            strNombreJugador1 = Console.ReadLine();
             Console.WriteLine("Ingrese el nombre del segundo jugador");
-            nombreJ2 = Console.ReadLine();
+            strNombreJugador2 = Console.ReadLine();
 
-            jugadorEnTurno = nombreJ1;
+            strJugadorEnTurno = strNombreJugador1;
 
-            while (!hayGanador)
+            while (!boolHayGanador || intContador<=9)
             {
-                cambiarJugador = true;
-                //Marcar la ficha que esta en juego j1 = X j2 = O
-                fichaActual = jugadorEnTurno.Equals(nombreJ1) ? j1 : j2;
+                Console.Clear();
+                //Marcar la ficha que esta en juego strJugador1 = X strJugador2 = O
+                strFichaActual = strJugadorEnTurno.Equals(strNombreJugador1) ? strJugador1 : strJugador2;
 
-                Console.WriteLine($"Es el turno de {jugadorEnTurno}");
+                Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
 
-                posicion = Console.ReadLine();
+                strPosicion = Console.ReadLine();
 
-                switch (posicion)
+                switch (strPosicion)
                 {
                     case "1":
 
-                        if (p1.Equals(" "))
+                        if (strPosicion1.Equals(" "))
                         {
-                            p1 = fichaActual;
+                            strPosicion1 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
+                            boolCambiarJugador = true;
                         }
                         break;
                     case "2":
 
-                        if (p2.Equals(" "))
+                        if (strPosicion2.Equals(" "))
                         {
-                            p2 = fichaActual;
+                            strPosicion2 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "3":
 
-                        if (p3.Equals(" "))
+                        if (strPosicion3.Equals(" "))
                         {
-                            p3 = fichaActual;
+                            strPosicion3 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "4":
 
-                        if (p4.Equals(" "))
+                        if (strPosicion4.Equals(" "))
                         {
-                            p4 = fichaActual;
+                            strPosicion4 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "5":
 
-                        if (p5.Equals(" "))
+                        if (strPosicion5.Equals(" "))
                         {
-                            p5 = fichaActual;
+                            strPosicion5 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                           
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "6":
 
-                        if (p6.Equals(" "))
+                        if (strPosicion6.Equals(" "))
                         {
-                            p6 = fichaActual;
+                            strPosicion6 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                           
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "7":
 
-                        if (p7.Equals(" "))
+                        if (strPosicion7.Equals(" "))
                         {
-                            p7 = fichaActual;
+                            strPosicion7 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "8":
 
-                        if (p8.Equals(" "))
+                        if (strPosicion8.Equals(" "))
                         {
-                            p8 = fichaActual;
+                            strPosicion8 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
                     case "9":
 
-                        if (p9.Equals(" "))
+                        if (strPosicion9.Equals(" "))
                         {
-                            p9 = fichaActual;
+                            strPosicion9 = strFichaActual;
+                            boolCambiarJugador = true;
                         }
                         else
                         {
-                            
-                            cambiarJugador = false;
+
+                            boolCambiarJugador = false;
                         }
                         break;
 
                     default:
-                        Console.WriteLine("El dato ingresado no es una posicion valida");
+                        Console.WriteLine("El dato ingresado no es una strPosicion valida");
                         break;
                 }
-                if (cambiarJugador) { //si se cambia de jugador entonces que se muestre el tablero con los ultimos ingresos
-                    tablero = ($"╔═╦═╦═╗" +
-                        $"\n║{p7}║{p8}║{p9}║" +
-                        $"\n╠═╠═╠═╣" +
-                        $"\n║{p4}║{p5}║{p6}║" +
-                        $"\n╠═╠═╠═╣" +
-                        $"\n║{p1}║{p2}║{p3}║" +
-                        $"\n╚═╩═╩═╝");
-                    Contador++;
-                    if (Contador == 9)
-                    {
-                        hayGanador = true;
-                     }
 
-                    jugadorEnTurno = jugadorEnTurno.Equals(nombreJ1) ? nombreJ2 : nombreJ1;
-                    Console.WriteLine(tablero);
+                if (boolCambiarJugador)
+                { //si se cambia de jugador entonces que se muestre el strTablero con los ultimos ingresos
+                    strTablero = ($"╔═╦═╦═╗" +
+                        $"\n║{strPosicion7}║{strPosicion8}║{strPosicion9}║" +
+                        $"\n╠═╠═╠═╣" +
+                        $"\n║{strPosicion4}║{strPosicion5}║{strPosicion6}║" +
+                        $"\n╠═╠═╠═╣" +
+                        $"\n║{strPosicion1}║{strPosicion2}║{strPosicion3}║" +
+                        $"\n╚═╩═╩═╝");
+                    intContador++;
+
+                    strJugadorEnTurno = strJugadorEnTurno.Equals(strNombreJugador1) ? strNombreJugador2 : strNombreJugador1;
+                    Console.WriteLine(strTablero);
 
                 }
                 else
                 {
-                    Console.WriteLine("La posicion esta ocupada\nIntente de nuevo");
+                    Console.WriteLine("La Posicion ingresada no es valida\nIntente de nuevo");
                 }
-                    // Console.Clear();
+                
 
 
-                    Console.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
+                Console.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
                 Console.ReadKey();
             }
 
 
-            
+
         }
     }
 }

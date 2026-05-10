@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\eyuman\\source\\repos\\Totito_Programacion1\\",
+  "WorkspaceRootPath": "C:\\Users\\eyuman\\source\\repos\\totito\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{45C79136-0BAF-4C2B-87DC-02A19D47F045}|Totito_Programacion1\\Totito_Programacion1.csproj|c:\\users\\eyuman\\source\\repos\\totito_programacion1\\totito_programacion1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{45C79136-0BAF-4C2B-87DC-02A19D47F045}|Totito_Programacion1\\Totito_Programacion1.csproj|c:\\users\\eyuman\\source\\repos\\totito\\totito_programacion1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{45C79136-0BAF-4C2B-87DC-02A19D47F045}|Totito_Programacion1\\Totito_Programacion1.csproj|solutionrelative:totito_programacion1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\eyuman\\source\\repos\\Totito_Programacion1\\Totito_Programacion1\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\eyuman\\source\\repos\\totito\\Totito_Programacion1\\Program.cs",
               "RelativeDocumentMoniker": "Totito_Programacion1\\Program.cs",
-              "ToolTip": "C:\\Users\\eyuman\\source\\repos\\Totito_Programacion1\\Totito_Programacion1\\Program.cs",
+              "ToolTip": "C:\\Users\\eyuman\\source\\repos\\totito\\Totito_Programacion1\\Program.cs",
               "RelativeToolTip": "Totito_Programacion1\\Program.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAYwJYAAABSAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAYwCcAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-19T15:08:46.092Z",
               "EditorCaption": ""
