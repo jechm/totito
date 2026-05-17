@@ -1,0 +1,23 @@
+[33mcommit 46d25450ea0d32e928b9621e00b2331209bf3b37[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: jechm <chemilo94@gmail.com>
+Date:   Sat May 16 22:30:52 2026 -0600
+
+    se cambio el uso de 9 variables para las posiciones por un vector de tipo string, tambien se cambio la impresion del tablero a una funcion aparte y la revision de ganador se hace ahora con dos funciones
+
+[33mcommit 83021eb03c8767f02fead34ad30908bc0fc2eec2[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Emilio Chamale <chemilo94@gmail.com>
+Date:   Sun May 10 09:34:18 2026 -0600
+
+    correccion en el conteo de turnos y cambio a nombre de variables
+
+[33mcommit 95a414f50b14dbfde7fc6612f6b7c3744b530462[m
+Author: jechm <chemilo94@gmail.com>
+Date:   Mon Apr 20 01:28:06 2026 -0600
+
+    Se agrego el ciclo while para repetir el juego hasta que se encuentre un ganador
+
+[33mcommit cc20cf04433ec1b6dc9b4c3e7cb1be0f0bbb84b3[m
+Author: Emilio Chamale <chemilo94@gmail.com>
+Date:   Mon Apr 20 00:23:31 2026 -0600
+
+    Creacion del proyecto totito de Programacion 1, Version 1 solo ciclos y condicionales

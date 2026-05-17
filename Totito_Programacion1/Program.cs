@@ -60,9 +60,14 @@ namespace Totito_Programacion1
 
                     strPosiciones[intPosicionIngresada - 1] = strFichaActual;
                     strMostrarTablero(strPosiciones);
-                    strJugadorEnTurno = strJugadorEnTurno.Equals(strNombreJugador1) ? strNombreJugador2 : strNombreJugador1;
+                    
                     boolHayGanador = verificarGanador(strPosiciones);
                     intContador++;
+                    if (!boolHayGanador)
+                    {
+                        strJugadorEnTurno = strJugadorEnTurno.Equals(strNombreJugador1) ? strNombreJugador2 : strNombreJugador1;
+                    }
+                    
                 }
                 else
                 {
@@ -76,10 +81,15 @@ namespace Totito_Programacion1
             }
 
 
-            if (!boolHayGanador && intContador>=9)
+            if (!boolHayGanador)
             {
                 Console.WriteLine("EL PARTIDO TERMINO EN EMPATE");
             }
+            else
+            {
+                Console.WriteLine($"El ganador es: {strJugadorEnTurno}");
+            }
+            Console.ReadKey();
 
 
 
