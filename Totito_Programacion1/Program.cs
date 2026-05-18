@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Security.Cryptography;
 
 namespace Totito_Programacion1
@@ -21,18 +22,18 @@ namespace Totito_Programacion1
              * Alt 206 ╬ 
              */
             Console.WriteLine("Totito");
-            int intPosicionIngresada=0;
+            int intPosicionIngresada = 0;
 
-            String [] strPosiciones = { " "," ", " ", " ", " ", " ", " ", " ", " " };
+            String[] strPosiciones = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
             String strFichaActual, strJugador1 = "X", strJugador2 = "O";
             String strNombreJugador1 = "Player 1", strNombreJugador2 = "Player 2";
             String strJugadorEnTurno;
             int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
             Boolean boolHayGanador = false;
-            Boolean boolCambiarJugador=false;
+            Boolean boolCambiarJugador = false;
 
-            
-                //datos de los jugadores
+
+            //datos de los jugadores
             Console.WriteLine("Ingrese el nombre del primer jugador");
             strNombreJugador1 = Console.ReadLine();
             Console.WriteLine("Ingrese el nombre del segundo jugador");
@@ -40,40 +41,40 @@ namespace Totito_Programacion1
 
             strJugadorEnTurno = strNombreJugador1;
 
-            while (!boolHayGanador && intContador<=9)
+            while (!boolHayGanador && intContador <= 9)
             {
-                Console.Clear();
+
                 //Marcar la ficha que esta en juego strJugador1 = X strJugador2 = O
                 strFichaActual = strJugadorEnTurno.Equals(strNombreJugador1) ? strJugador1 : strJugador2;
 
                 Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
 
-                intPosicionIngresada = Convert.ToInt32(Console.ReadLine());
+                intPosicionIngresada = ObtenerPosicionIngresada();
 
                 //verifica si la posicion esta ocupada si la posicion no esta ocupada entonces se pude cambiar de jugador por lo tanto se escribe en el tablero
                 //y el contador de turnos aumenta en 1
-                boolCambiarJugador = intPosicionIngresada >0 && intPosicionIngresada <=9 && strPosiciones[intPosicionIngresada - 1].Equals(" ");
-                
+                boolCambiarJugador = intPosicionIngresada > 0 && intPosicionIngresada <= 9 && strPosiciones[intPosicionIngresada - 1].Equals(" ");
+
 
                 if (boolCambiarJugador)
                 { //si se cambia de jugador entonces que se muestre el strTablero con los ultimos ingresos
 
                     strPosiciones[intPosicionIngresada - 1] = strFichaActual;
-                    strMostrarTablero(strPosiciones);
-                    
+                    MostrarTablero(strPosiciones);
+
                     boolHayGanador = verificarGanador(strPosiciones);
                     intContador++;
                     if (!boolHayGanador)
                     {
                         strJugadorEnTurno = strJugadorEnTurno.Equals(strNombreJugador1) ? strNombreJugador2 : strNombreJugador1;
                     }
-                    
+
                 }
                 else
                 {
                     Console.WriteLine("La Posicion ingresada no es valida\nIntente de nuevo");
                 }
-                
+
 
 
                 Console.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
@@ -123,9 +124,12 @@ namespace Totito_Programacion1
 
 
         //Funcion que muestra el tablero en pantalla
-        static void strMostrarTablero(String[] posiciones)
+        static void MostrarTablero(String[] posiciones)
         {
             String strTablero;
+
+            Console.Clear();
+
             strTablero = ($"╔═╦═╦═╗" +
     $"\n║{posiciones[6]}║{posiciones[7]}║{posiciones[8]}║" +
     $"\n╠═╠═╠═╣" +
@@ -135,7 +139,35 @@ namespace Totito_Programacion1
     $"\n╚═╩═╩═╝");
 
             Console.WriteLine(strTablero);
-
         }
+
+        //Procesa el ingreso de la posicion deseada
+        //Si se ingresa un valor incorrecto entonces devuelve -1 para indicar un valor invalido
+        static int ObtenerPosicionIngresada()
+        {
+
+            String strValorIngresado = "";
+            int posicion = -1;
+
+            strValorIngresado = Console.ReadLine();
+
+            try
+            {
+                posicion = Convert.ToInt32(strValorIngresado.Trim());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("El valor ingresado no es valido");
+                posicion = -1;
+            }
+
+            return posicion;
+        }
+    
+
+            
+        
     }
 }
+
+//a = Console.ReadKey.keychar
