@@ -1,11 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Data.Common;
 using System.Security.Cryptography;
 
 namespace Totito_Programacion1
 {
     internal class Program
     {
+        static int intPosicionIngresada = 0;
         static void Main(string[] args)
         {
             /*para el strTablero
@@ -21,8 +23,8 @@ namespace Totito_Programacion1
              * Alt 205 ═
              * Alt 206 ╬ 
              */
-            Console.WriteLine("Totito");
-            int intPosicionIngresada = 0;
+
+            
 
             String[] strPosiciones = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
             String strFichaActual, strJugador1 = "X", strJugador2 = "O";
@@ -32,6 +34,7 @@ namespace Totito_Programacion1
             Boolean boolHayGanador = false;
             Boolean boolCambiarJugador = false;
 
+            elegirModoDeJuego();
 
             //datos de los jugadores
             Console.WriteLine("Ingrese el nombre del primer jugador");
@@ -77,11 +80,12 @@ namespace Totito_Programacion1
 
 
 
-                Console.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
-                Console.ReadKey();
+                //eConsole.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
+                //Console.ReadKey();
             }
 
-
+            Console.Clear();
+            MostrarTablero(strPosiciones);
             if (!boolHayGanador)
             {
                 Console.WriteLine("EL PARTIDO TERMINO EN EMPATE");
@@ -95,7 +99,7 @@ namespace Totito_Programacion1
 
 
         }
-
+        
         static bool verificarGanador(string[] strPosiciones)
         {
             /*hay 8 formas de que alguien gane
@@ -151,17 +155,71 @@ namespace Totito_Programacion1
 
             strValorIngresado = Console.ReadLine();
 
+            //utilizar un try para los casos en los cuales se ingresa texto o bien espacios vacios o nada
             try
             {
                 posicion = Convert.ToInt32(strValorIngresado.Trim());
             }
             catch (Exception e)
             {
-                Console.WriteLine("El valor ingresado no es valido");
+               // Console.WriteLine("El valor ingresado no es valido");
                 posicion = -1;
             }
 
             return posicion;
+        }
+
+        static void elegirModoDeJuego()
+        {
+            mostrarMenuModo();
+
+        }
+
+        static void mostrarMenuModo() {
+
+            int posicionEnX, posicionEnY;
+            posicionEnX = 26;
+            posicionEnY = 0;
+
+            imprimirCentrado("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █", posicionEnX, posicionEnY++);
+            imprimirCentrado(" █                             █", posicionEnX, posicionEnY++);
+            imprimirCentrado("█   ███ ███ ███ ███ ███ ███   █", posicionEnX, posicionEnY++);
+            imprimirCentrado(" █   █  █ █  █   █   █  █ █    █", posicionEnX, posicionEnY++);
+            imprimirCentrado("█    █  ███ ███  █   █  ███   █", posicionEnX, posicionEnY++);
+            imprimirCentrado(" █                             █", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █", posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ ELIGE EL MODO DE JUEGO       █", posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ 1. Jugador Vs Jugador        █",posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ 2. Jugador Vs Computador     █", posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ Ingrese la opcion Elegida:   █", posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY);
+            posicionEnY-=2;
+            
+            do
+            {
+                intPosicionIngresada = ObtenerPosicionIngresada();
+                if (intPosicionIngresada == 1 || intPosicionIngresada ==2)
+                {
+                    imprimirCentrado($"2", 30, posicionEnY);
+                }
+                else
+                {
+                    imprimirCentrado($" ", 30, posicionEnY);
+                }
+                    
+            } while (!(intPosicionIngresada == 1 || intPosicionIngresada == 2));
+
+
+        }
+        static void imprimirCentrado(String texto, int columna ,int fila)
+        {
+            Console.SetCursorPosition(columna, fila);
+            Console.WriteLine(texto);
+
         }
     
 
