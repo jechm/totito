@@ -33,14 +33,24 @@ namespace Totito_Programacion1
             int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
             Boolean boolHayGanador = false;
             Boolean boolCambiarJugador = false;
+            Boolean nombresCorrectos=false;
+            int modoDeJuego = -1;
 
             elegirModoDeJuego();
 
             //datos de los jugadores
-            Console.WriteLine("Ingrese el nombre del primer jugador");
-            strNombreJugador1 = Console.ReadLine();
-            Console.WriteLine("Ingrese el nombre del segundo jugador");
-            strNombreJugador2 = Console.ReadLine();
+            
+            do
+            {
+                Console.WriteLine("Ingrese el nombre del primer jugador");
+                strNombreJugador1 = Console.ReadLine();
+                if (strNombreJugador2)
+                Console.WriteLine("Ingrese el nombre del segundo jugador");
+                strNombreJugador2 = Console.ReadLine();
+
+                nombresCorrectos =strNombreJugador1!=strNombreJugador2;
+            } while (nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
+            
 
             strJugadorEnTurno = strNombreJugador1;
 
@@ -197,7 +207,10 @@ namespace Totito_Programacion1
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
             imprimirCentrado("█ Ingrese la opcion Elegida:   █", posicionEnX, posicionEnY++);
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY);
-            posicionEnY-=2;
+            posicionEnY=14;
+            posicionEnX += 29;
+
+            Console.SetCursorPosition(posicionEnX, posicionEnY);
             
             do
             {
