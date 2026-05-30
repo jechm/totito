@@ -35,25 +35,22 @@ namespace Totito_Programacion1
             int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
             Boolean boolHayGanador = false;
             Boolean boolCambiarJugador = false;
-            Boolean nombresCorrectos=false;
+
             int modoDeJuego = 1;// pvp por defecto =  1 y  2 = pvc 
 
             modoDeJuego = elegirModoDeJuego();
 
             //datos de los jugadores
+            switch (modoDeJuego){
+                case 1:
+                    Console.WriteLine("JUGADOR VS JUGADOR");
+                    ingresarJugadores(ref strNombreJugador1, ref strNombreJugador2);
+                    break;
+                case 2: 
+                    Console.WriteLine("JUGADOR VS COMPUTADOR");
+                    break;
+            }
             
-            do
-            {
-                Console.WriteLine("Ingrese el nombre del primer jugador");
-                strNombreJugador1 = Console.ReadLine();
-                if (strNombreJugador2=="")
-                Console.WriteLine("Ingrese el nombre del segundo jugador");
-                strNombreJugador2 = Console.ReadLine();
-
-                nombresCorrectos =strNombreJugador1!=strNombreJugador2;
-            } while (nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
-            
-
             strJugadorEnTurno = strNombreJugador1;
 
             while (!boolHayGanador && intContador <= 9)
@@ -111,7 +108,22 @@ namespace Totito_Programacion1
 
 
         }
-        
+
+        private static void ingresarJugadores(ref string strNombreJugador1, ref string strNombreJugador2)
+        {
+            bool nombresCorrectos = false;
+            do
+            {
+                Console.WriteLine("Ingrese el nombre del primer jugador");
+                strNombreJugador1 = Console.ReadLine();
+                if (strNombreJugador2 == "")
+                    Console.WriteLine("Ingrese el nombre del segundo jugador");
+                strNombreJugador2 = Console.ReadLine();
+
+                nombresCorrectos = strNombreJugador1 != strNombreJugador2;
+            } while (nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
+        }
+
         static bool verificarGanador(string[] strPosiciones)
         {
             /*hay 8 formas de que alguien gane
@@ -207,7 +219,7 @@ namespace Totito_Programacion1
                     Console.SetCursorPosition(0, 18);
                 }
 
-            } while (intOpcionIngresada !=3);
+            } while (intOpcionIngresada < 0 || intOpcionIngresada > 3);
 
             
 
