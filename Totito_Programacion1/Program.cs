@@ -5,9 +5,11 @@ using System.Security.Cryptography;
 
 namespace Totito_Programacion1
 {
+    
     internal class Program
     {
-        static int intPosicionIngresada = 0;
+
+        private static int intOpcionIngresada = 0;
         static void Main(string[] args)
         {
             /*para el strTablero
@@ -34,7 +36,7 @@ namespace Totito_Programacion1
             Boolean boolHayGanador = false;
             Boolean boolCambiarJugador = false;
             Boolean nombresCorrectos=false;
-            int modoDeJuego = -1;
+            int modoDeJuego = 1;// pvp por defecto =  1 y  2 = pvc 
 
             elegirModoDeJuego();
 
@@ -44,7 +46,7 @@ namespace Totito_Programacion1
             {
                 Console.WriteLine("Ingrese el nombre del primer jugador");
                 strNombreJugador1 = Console.ReadLine();
-                if (strNombreJugador2)
+                if (strNombreJugador2=="")
                 Console.WriteLine("Ingrese el nombre del segundo jugador");
                 strNombreJugador2 = Console.ReadLine();
 
@@ -62,17 +64,17 @@ namespace Totito_Programacion1
 
                 Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
 
-                intPosicionIngresada = ObtenerPosicionIngresada();
+                intOpcionIngresada = ObtenerOpcionIngresada();
 
                 //verifica si la posicion esta ocupada si la posicion no esta ocupada entonces se pude cambiar de jugador por lo tanto se escribe en el tablero
                 //y el contador de turnos aumenta en 1
-                boolCambiarJugador = intPosicionIngresada > 0 && intPosicionIngresada <= 9 && strPosiciones[intPosicionIngresada - 1].Equals(" ");
+                boolCambiarJugador = intOpcionIngresada > 0 && intOpcionIngresada <= 9 && strPosiciones[intOpcionIngresada - 1].Equals(" ");
 
 
                 if (boolCambiarJugador)
                 { //si se cambia de jugador entonces que se muestre el strTablero con los ultimos ingresos
 
-                    strPosiciones[intPosicionIngresada - 1] = strFichaActual;
+                    strPosiciones[intOpcionIngresada - 1] = strFichaActual;
                     MostrarTablero(strPosiciones);
 
                     boolHayGanador = verificarGanador(strPosiciones);
@@ -155,29 +157,29 @@ namespace Totito_Programacion1
             Console.WriteLine(strTablero);
         }
 
-        //Procesa el ingreso de la posicion deseada
+        //Procesa el ingreso de opciones del usuario puede referirse a opciones del menú o bien  la posicion deseada
         //Si se ingresa un valor incorrecto entonces devuelve -1 para indicar un valor invalido
-        static int ObtenerPosicionIngresada()
+        static int ObtenerOpcionIngresada()
         {
 
-            String strValorIngresado = "";
+            char charValorIngresado;
             int posicion = -1;
 
-            strValorIngresado = Console.ReadLine();
+            charValorIngresado = Console.ReadKey().KeyChar;
 
-            //utilizar un try para los casos en los cuales se ingresa texto o bien espacios vacios o nada
-            try
-            {
-                posicion = Convert.ToInt32(strValorIngresado.Trim());
+            
+            //revisar si el valor de la tecla presionada se puede convertir a int 32 o no
+            if(Int32.TryParse(charValorIngresado.ToString(), out int resultado)){
+                posicion = resultado;
             }
-            catch (Exception e)
+            else
             {
-               // Console.WriteLine("El valor ingresado no es valido");
                 posicion = -1;
             }
 
-            return posicion;
+                return posicion;
         }
+        //ObtenerOpocionIngresada esta completo
 
         static void elegirModoDeJuego()
         {
@@ -205,6 +207,8 @@ namespace Totito_Programacion1
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
             imprimirCentrado("█ 2. Jugador Vs Computador     █", posicionEnX, posicionEnY++);
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
+            imprimirCentrado("█ 3. Salir del Juego           █", posicionEnX, posicionEnY++);
+            imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
             imprimirCentrado("█ Ingrese la opcion Elegida:   █", posicionEnX, posicionEnY++);
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY);
             posicionEnY=14;
@@ -214,8 +218,8 @@ namespace Totito_Programacion1
             
             do
             {
-                intPosicionIngresada = ObtenerPosicionIngresada();
-                if (intPosicionIngresada == 1 || intPosicionIngresada ==2)
+                intOpcionIngresada = ObtenerOpcionIngresada();
+                if (intOpcionIngresada == 1 || intOpcionIngresada ==2)
                 {
                     imprimirCentrado($"2", 30, posicionEnY);
                 }
@@ -224,7 +228,7 @@ namespace Totito_Programacion1
                     imprimirCentrado($" ", 30, posicionEnY);
                 }
                     
-            } while (!(intPosicionIngresada == 1 || intPosicionIngresada == 2));
+            } while (!(intOpcionIngresada == 1 || intOpcionIngresada == 2));
 
 
         }
