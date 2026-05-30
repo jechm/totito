@@ -38,7 +38,7 @@ namespace Totito_Programacion1
             Boolean nombresCorrectos=false;
             int modoDeJuego = 1;// pvp por defecto =  1 y  2 = pvc 
 
-            elegirModoDeJuego();
+            modoDeJuego = elegirModoDeJuego();
 
             //datos de los jugadores
             
@@ -181,10 +181,37 @@ namespace Totito_Programacion1
         }
         //ObtenerOpocionIngresada esta completo
 
-        static void elegirModoDeJuego()
+        static int elegirModoDeJuego()
         {
-            mostrarMenuModo();
+                
+            do
+            {
+                Console.Clear();
+                mostrarMenuModo();
+         
+                Console.SetCursorPosition(55, 16);
+                intOpcionIngresada = ObtenerOpcionIngresada();
 
+                if (intOpcionIngresada < 0 || intOpcionIngresada > 3)
+                {
+                    
+                    imprimirCentrado("opcion no valida: presione cualquier tecla para continuar", 0, 18);
+                    Console.ReadKey();
+                }
+                else if(intOpcionIngresada == 3)
+                {
+                    imprimirCentrado("ADIOS, Que tengas buen día", 0, 18);
+                    Console.ReadKey();
+                } else
+                {
+                    Console.SetCursorPosition(0, 18);
+                }
+
+            } while (intOpcionIngresada !=3);
+
+            
+
+            return intOpcionIngresada;
         }
 
         static void mostrarMenuModo() {
@@ -211,27 +238,12 @@ namespace Totito_Programacion1
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
             imprimirCentrado("█ Ingrese la opcion Elegida:   █", posicionEnX, posicionEnY++);
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY);
-            posicionEnY=14;
-            posicionEnX += 29;
-
-            Console.SetCursorPosition(posicionEnX, posicionEnY);
-            
-            do
-            {
-                intOpcionIngresada = ObtenerOpcionIngresada();
-                if (intOpcionIngresada == 1 || intOpcionIngresada ==2)
-                {
-                    imprimirCentrado($"2", 30, posicionEnY);
-                }
-                else
-                {
-                    imprimirCentrado($" ", 30, posicionEnY);
-                }
-                    
-            } while (!(intOpcionIngresada == 1 || intOpcionIngresada == 2));
 
 
         }
+
+
+        //muestra en consola un texto en la ubicacion pasada
         static void imprimirCentrado(String texto, int columna ,int fila)
         {
             Console.SetCursorPosition(columna, fila);
