@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlTypes;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace Totito_Programacion1
 {
@@ -11,6 +13,7 @@ namespace Totito_Programacion1
     {
 
         private static int intOpcionIngresada = 0;
+
         static void Main(string[] args)
         {
             /*para el strTablero
@@ -28,41 +31,68 @@ namespace Totito_Programacion1
              */
 
             
+            String strNombreJugador1, strNombreJugador2;
 
+            int modoDeJuego;// pvp por defecto =  1 y  2 = pvc 
             
-            
-            String strNombreJugador1 = "", strNombreJugador2 = "";
-            
+            do
+            {
+                //Riniciar valores si se elige juego nuevo
+                modoDeJuego = 1;
+                strNombreJugador1 = "";
+                strNombreJugador2 = "";
+                modoDeJuego = elegirModoDeJuego();
+                Console.Clear();
+                
+                switch (modoDeJuego)
+                {
+                    case 1:
 
-            int modoDeJuego = 1;// pvp por defecto =  1 y  2 = pvc 
-
-            modoDeJuego = elegirModoDeJuego();
-
-            //datos de los jugadores
-            switch (modoDeJuego){
-                case 1:
-                    Console.WriteLine("JUGADOR VS JUGADOR");
-                    ingresarJugadores(ref strNombreJugador1, ref strNombreJugador2);
-                    procesarJuego(strNombreJugador1, strNombreJugador2);
-                    break;
-                case 2: 
-                    Console.WriteLine("JUGADOR VS COMPUTADOR");
-                    ingresarJugadorUnico(ref strNombreJugador1);
-                    if (obtenerOrden())
-                    {
-                        procesarJuego(strNombreJugador1, "Mr. Robot");
-                    }
-                    else
-                    {
-                        procesarJuego("Mr. Robot", strNombreJugador1);
-                    }
+                        Console.WriteLine("JUGADOR VS JUGADOR");
+                        ingresarJugadores(ref strNombreJugador1, ref strNombreJugador2);
+                        procesarJuego(strNombreJugador1, strNombreJugador2);
+                        break;
+                    case 2:
+                        Console.WriteLine("JUGADOR VS COMPUTADOR");
+                        ingresarJugadorUnico(ref strNombreJugador1);
+                        if (obtenerOrden())
+                        {
+                            procesarJuego(strNombreJugador1, "Mr. Robot");
+                        }
+                        else
+                        {
+                            procesarJuego("Mr. Robot", strNombreJugador1);
+                        }
 
                         break;
-            }
+
+                        
+                }
+                if (intOpcionIngresada != 3)
+                {
+                    do
+                    {
+                        Console.WriteLine("DESEA JUGAR DE NUEVO:" +
+                                    "\n1 = SI" +
+                                    "\n2 = NO");
+                        intOpcionIngresada = ObtenerOpcionIngresada();
+                        ;
+                        if (intOpcionIngresada < 2 || intOpcionIngresada > 3)
+                        {
+                            Console.WriteLine("La opcion no es valida");
+                        }
+                    } while (intOpcionIngresada < 1 || intOpcionIngresada > 2);
+
+                    intOpcionIngresada = intOpcionIngresada == 1 ? 1 : 3;
+                    Console.Clear();
+                }
+            } while (intOpcionIngresada!=3);
 
 
         }
 
+
+        //determina si el jugador 1 o la computadora va primero
         private static bool obtenerOrden()
         {
             Random valorAleatorio = new Random();
@@ -71,11 +101,13 @@ namespace Totito_Programacion1
             return (resultado%2==0);
         }
 
+        //se encarga de la logica del juego ya sea para 1 o 2 jugadores
         private static void procesarJuego(string strNombreJugador1, string strNombreJugador2)
         {
+
             String[] strPosiciones = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
-            String strFichaActual, strJugador1 = "X", strJugador2 = "O";
-            String strJugadorEnTurno;
+            string strFichaActual, strJugador1 = "X", strJugador2 = "O";
+            string strJugadorEnTurno;
             int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
             Boolean boolHayGanador = false;
             Boolean boolCambiarJugador = false;
@@ -83,13 +115,27 @@ namespace Totito_Programacion1
 
             while (!boolHayGanador && intContador <= 9)
             {
-
+                MostrarTablero(strPosiciones);
                 //Marcar la ficha que esta en juego strJugador1 = X strJugador2 = O
                 strFichaActual = strJugadorEnTurno.Equals(strNombreJugador1) ? strJugador1 : strJugador2;
 
-                Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
+                
 
-                intOpcionIngresada = ObtenerOpcionIngresada();
+                if (strJugadorEnTurno.Equals("Mr. Robot"))
+                {
+                    Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
+                    intOpcionIngresada = obtenerMovimientoPc(ref strPosiciones);
+                    Thread.Sleep(200);
+                    Console.WriteLine(intOpcionIngresada);
+                    Thread.Sleep(500);
+                    
+                }
+                else
+                {
+                    Console.WriteLine($"Es el turno de {strJugadorEnTurno}");
+                    intOpcionIngresada = ObtenerOpcionIngresada();
+                }
+                    
 
                 //verifica si la posicion esta ocupada si la posicion no esta ocupada entonces se pude cambiar de jugador por lo tanto se escribe en el tablero
                 //y el contador de turnos aumenta en 1
@@ -113,33 +159,58 @@ namespace Totito_Programacion1
                 else
                 {
                     Console.WriteLine("La Posicion ingresada no es valida\nIntente de nuevo");
+                    Thread.Sleep(500);
                 }
 
 
 
-                //eConsole.WriteLine("PRESIONE CUALQUIER TECLA PARA CONTINUAR");
-                //Console.ReadKey();
             }
-
+            
             Console.Clear();
+
             MostrarTablero(strPosiciones);
+            Console.WriteLine("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n" +
+                " █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n");
             if (!boolHayGanador)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("EL PARTIDO TERMINO EN EMPATE");
             }
             else
             {
-                Console.WriteLine($"El ganador es: {strJugadorEnTurno}");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"EL GANADOR ES: {strJugadorEnTurno}");
             }
+            Console.ForegroundColor= ConsoleColor.White;
+            Console.WriteLine("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n" +
+    " █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n");
             Console.ReadKey();
+
+            intOpcionIngresada = 0;
+
         }
 
 
+        //obtiene el movimiento que realizara la maquina
+        private static int obtenerMovimientoPc(ref String [] posiciones)
+        {
+            int posicionElegida = 0;
+            Random numeroPrueba = new Random();
+            do
+            {
+                posicionElegida = numeroPrueba.Next(1, 9);
+                
+            } while(posiciones[posicionElegida-1].Equals(""));
+
+                return posicionElegida;
+        }
+
+        //Solicita el nombre de un solo jugador
         private static void ingresarJugadorUnico(ref string strNombreJugador1)
         {
             do
             {
-                Console.WriteLine("Inlgrese su nombre: ");
+                Console.WriteLine("Ingrese su nombre: ");
                 strNombreJugador1 = Console.ReadLine().Trim();
 
                 if (strNombreJugador1.Equals("")){
@@ -234,26 +305,6 @@ namespace Totito_Programacion1
 
         }
 
-
-
-        //Funcion que muestra el tablero en pantalla
-        static void MostrarTablero(String[] posiciones)
-        {
-            String strTablero;
-
-            Console.Clear();
-
-            strTablero = ($"╔═╦═╦═╗" +
-    $"\n║{posiciones[6]}║{posiciones[7]}║{posiciones[8]}║" +
-    $"\n╠═╠═╠═╣" +
-    $"\n║{posiciones[3]}║{posiciones[4]}║{posiciones[5]}║" +
-    $"\n╠═╠═╠═╣" +
-    $"\n║{posiciones[0]}║{posiciones[1]}║{posiciones[2]}║" +
-    $"\n╚═╩═╩═╝");
-
-            Console.WriteLine(strTablero);
-        }
-
         //Procesa el ingreso de opciones del usuario puede referirse a opciones del menú o bien  la posicion deseada
         //Si se ingresa un valor incorrecto entonces devuelve -1 para indicar un valor invalido
         static int ObtenerOpcionIngresada()
@@ -277,6 +328,24 @@ namespace Totito_Programacion1
                 return posicion;
         }
         //ObtenerOpocionIngresada esta completo
+
+        //Funcion que muestra el tablero en pantalla
+        static void MostrarTablero(String[] posiciones)
+        {
+            String strTablero;
+
+            Console.Clear();
+
+            strTablero = ($"╔═╦═╦═╗" +
+    $"\n║{posiciones[6]}║{posiciones[7]}║{posiciones[8]}║" +
+    $"\n╠═╠═╠═╣" +
+    $"\n║{posiciones[3]}║{posiciones[4]}║{posiciones[5]}║" +
+    $"\n╠═╠═╠═╣" +
+    $"\n║{posiciones[0]}║{posiciones[1]}║{posiciones[2]}║" +
+    $"\n╚═╩═╩═╝");
+
+            Console.WriteLine(strTablero);
+        }
 
         static int elegirModoDeJuego()
         {
