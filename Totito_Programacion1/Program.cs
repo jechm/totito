@@ -169,25 +169,69 @@ namespace Totito_Programacion1
             Console.Clear();
 
             MostrarTablero(strPosiciones);
-            Console.WriteLine("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n" +
-                " █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n");
             if (!boolHayGanador)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("EL PARTIDO TERMINO EN EMPATE");
+                //Console.WriteLine("EL PARTIDO TERMINO EN EMPATE");
+                mostrarBanner("EL PARTIDO TERMINO EN EMPATE");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"EL GANADOR ES: {strJugadorEnTurno}");
+                mostrarBanner($"EL GANADOR ES: {strJugadorEnTurno}");
             }
-            Console.ForegroundColor= ConsoleColor.White;
-            Console.WriteLine("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n" +
-    " █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ \n");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.ReadKey();
 
             intOpcionIngresada = 0;
 
+        }
+
+        //muestra un banner dependiendo si el jugo termino en empate o si hay ganador
+        private static void mostrarBanner(string msjResultado)
+        {
+            int intLargoMsjResultado = msjResultado.Length;
+
+            //objetivo que la longitud sea par para poder centrar mejor el mensaje final
+            if (!(intLargoMsjResultado % 2 == 0))
+            {
+                intLargoMsjResultado++;
+                msjResultado += " ";
+
+            }
+
+            intLargoMsjResultado += 20; //para colocar 10 espacios vacios a cada lado
+
+            string strMarcoSuperiorEInferiro = "";
+            int iterador1;
+            string strFilaImpar = "", strFilaPar ="";
+            string strMensajePreparado = "█          " + msjResultado + "          █";
+
+            for (iterador1 = 0; iterador1 < intLargoMsjResultado/2; iterador1++)
+            {
+                strMarcoSuperiorEInferiro += "██";
+
+                strFilaImpar += "█ ";
+                strFilaPar += " █";
+
+                
+
+            }
+            strMarcoSuperiorEInferiro += "██";
+            strFilaPar = "█" + strFilaPar + "█";
+            strFilaImpar = "█" + strFilaImpar + "█";
+
+
+            Console.WriteLine($"{strMarcoSuperiorEInferiro}" +
+                $"\n{strFilaImpar}" +
+                $"\n{strFilaPar}" +
+                $"\n{strMarcoSuperiorEInferiro}" +
+                $"\n{strMensajePreparado}" +
+                $"\n{strFilaImpar}" +
+                $"\n{strFilaPar}" +
+                $"\n{strMarcoSuperiorEInferiro}");
+
+            
         }
 
 
@@ -276,6 +320,10 @@ namespace Totito_Programacion1
                 nombresCorrectos = (strNombreJugador1 != strNombreJugador2) && (!strNombreJugador1.Equals("") && !strNombreJugador2.Equals(""));
 
             } while (!nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
+
+            //que los nombres siempre esten en mayusculas
+            strNombreJugador1 = strNombreJugador1.ToUpper();
+            strNombreJugador2 = strNombreJugador2.ToUpper();
         }
 
 
@@ -336,13 +384,13 @@ namespace Totito_Programacion1
 
             Console.Clear();
 
-            strTablero = ($"╔═╦═╦═╗" +
-    $"\n║{posiciones[6]}║{posiciones[7]}║{posiciones[8]}║" +
-    $"\n╠═╠═╠═╣" +
-    $"\n║{posiciones[3]}║{posiciones[4]}║{posiciones[5]}║" +
-    $"\n╠═╠═╠═╣" +
-    $"\n║{posiciones[0]}║{posiciones[1]}║{posiciones[2]}║" +
-    $"\n╚═╩═╩═╝");
+            strTablero = ($"\t\t\t╔═╦═╦═╗" +
+    $"\n\t\t\t║{posiciones[6]}║{posiciones[7]}║{posiciones[8]}║" +
+    $"\n\t\t\t╠═╠═╠═╣" +
+    $"\n\t\t\t║{posiciones[3]}║{posiciones[4]}║{posiciones[5]}║" +
+    $"\n\t\t\t╠═╠═╠═╣" +
+    $"\n\t\t\t║{posiciones[0]}║{posiciones[1]}║{posiciones[2]}║" +
+    $"\n\t\t\t╚═╩═╩═╝");
 
             Console.WriteLine(strTablero);
         }
