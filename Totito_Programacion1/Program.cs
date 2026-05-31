@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Data.Common;
+using System.Data.SqlTypes;
 using System.Security.Cryptography;
 
 namespace Totito_Programacion1
@@ -28,13 +29,10 @@ namespace Totito_Programacion1
 
             
 
-            String[] strPosiciones = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
-            String strFichaActual, strJugador1 = "X", strJugador2 = "O";
-            String strNombreJugador1 = "Player 1", strNombreJugador2 = "Player 2";
-            String strJugadorEnTurno;
-            int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
-            Boolean boolHayGanador = false;
-            Boolean boolCambiarJugador = false;
+            
+            
+            String strNombreJugador1 = "", strNombreJugador2 = "";
+            
 
             int modoDeJuego = 1;// pvp por defecto =  1 y  2 = pvc 
 
@@ -45,12 +43,42 @@ namespace Totito_Programacion1
                 case 1:
                     Console.WriteLine("JUGADOR VS JUGADOR");
                     ingresarJugadores(ref strNombreJugador1, ref strNombreJugador2);
+                    procesarJuego(strNombreJugador1, strNombreJugador2);
                     break;
                 case 2: 
                     Console.WriteLine("JUGADOR VS COMPUTADOR");
-                    break;
+                    ingresarJugadorUnico(ref strNombreJugador1);
+                    if (obtenerOrden())
+                    {
+                        procesarJuego(strNombreJugador1, "Mr. Robot");
+                    }
+                    else
+                    {
+                        procesarJuego("Mr. Robot", strNombreJugador1);
+                    }
+
+                        break;
             }
-            
+
+
+        }
+
+        private static bool obtenerOrden()
+        {
+            Random valorAleatorio = new Random();
+            int resultado = valorAleatorio.Next(1, 100);
+            Console.WriteLine(resultado);
+            return (resultado%2==0);
+        }
+
+        private static void procesarJuego(string strNombreJugador1, string strNombreJugador2)
+        {
+            String[] strPosiciones = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
+            String strFichaActual, strJugador1 = "X", strJugador2 = "O";
+            String strJugadorEnTurno;
+            int intContador = 1; //cuando el contador llegue a 9 o hay ganador o hay empate
+            Boolean boolHayGanador = false;
+            Boolean boolCambiarJugador = false;
             strJugadorEnTurno = strNombreJugador1;
 
             while (!boolHayGanador && intContador <= 9)
@@ -104,26 +132,83 @@ namespace Totito_Programacion1
                 Console.WriteLine($"El ganador es: {strJugadorEnTurno}");
             }
             Console.ReadKey();
-
-
-
         }
 
+
+        private static void ingresarJugadorUnico(ref string strNombreJugador1)
+        {
+            do
+            {
+                Console.WriteLine("Inlgrese su nombre: ");
+                strNombreJugador1 = Console.ReadLine().Trim();
+
+                if (strNombreJugador1.Equals("")){
+                    Console.WriteLine("El nombre no es valido intentar de nuevo");
+                }
+
+            } while (strNombreJugador1.Equals(""));
+        }
+
+
+        //funcion que permite el ingreso de los nombres de los jugadores
         private static void ingresarJugadores(ref string strNombreJugador1, ref string strNombreJugador2)
         {
             bool nombresCorrectos = false;
+            bool primerEntradaJ1=true, primerEntradaJ2=true;
             do
             {
-                Console.WriteLine("Ingrese el nombre del primer jugador");
-                strNombreJugador1 = Console.ReadLine();
-                if (strNombreJugador2 == "")
-                    Console.WriteLine("Ingrese el nombre del segundo jugador");
-                strNombreJugador2 = Console.ReadLine();
+                
 
-                nombresCorrectos = strNombreJugador1 != strNombreJugador2;
-            } while (nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
+                if (strNombreJugador1.Trim() == "")
+                {
+                    if (primerEntradaJ1)
+                    {
+                        primerEntradaJ1 = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nombre del jugador 1 es incorrecto Intente de nuevo");
+                        
+                    }
+
+                    Console.WriteLine("Ingrese el nombre del primer jugador");
+                    strNombreJugador1 = Console.ReadLine();
+
+                    
+                }
+
+
+                if (strNombreJugador2.Trim() == "")
+                {
+                    if (primerEntradaJ2)
+                    {
+                        primerEntradaJ2 = false;
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nombre del jugador 2 es incorrecto Intente de nuevo");
+                    }
+                    
+                    Console.WriteLine("Ingrese el nombre del segundo jugador");
+                    strNombreJugador2 = Console.ReadLine();
+
+                }
+
+
+                if (strNombreJugador2.Equals(strNombreJugador1))
+                {
+                    Console.WriteLine("No puede usar el mismo nombre que el jugador 1, intente de nuevo");
+                    strNombreJugador2 = "";
+                }
+
+                nombresCorrectos = (strNombreJugador1 != strNombreJugador2) && (!strNombreJugador1.Equals("") && !strNombreJugador2.Equals(""));
+
+            } while (!nombresCorrectos); //para que los nombres sean correctos deben de ser distintos y no vacios
         }
 
+
+        //funcion que revisa si hay un ganador, se ejecuta despues de un turno exitoso
         static bool verificarGanador(string[] strPosiciones)
         {
             /*hay 8 formas de que alguien gane
@@ -204,22 +289,18 @@ namespace Totito_Programacion1
                 Console.SetCursorPosition(55, 16);
                 intOpcionIngresada = ObtenerOpcionIngresada();
 
-                if (intOpcionIngresada < 0 || intOpcionIngresada > 3)
+                if (intOpcionIngresada <= 0 || intOpcionIngresada > 3)
                 {
                     
                     imprimirCentrado("opcion no valida: presione cualquier tecla para continuar", 0, 18);
                     Console.ReadKey();
-                }
-                else if(intOpcionIngresada == 3)
-                {
-                    imprimirCentrado("ADIOS, Que tengas buen día", 0, 18);
-                    Console.ReadKey();
+
                 } else
                 {
                     Console.SetCursorPosition(0, 18);
                 }
 
-            } while (intOpcionIngresada < 0 || intOpcionIngresada > 3);
+            } while (intOpcionIngresada <= 0 || intOpcionIngresada > 3);
 
             
 
@@ -236,7 +317,7 @@ namespace Totito_Programacion1
             imprimirCentrado(" █                             █", posicionEnX, posicionEnY++);
             imprimirCentrado("█   ███ ███ ███ ███ ███ ███   █", posicionEnX, posicionEnY++);
             imprimirCentrado(" █   █  █ █  █   █   █  █ █    █", posicionEnX, posicionEnY++);
-            imprimirCentrado("█    █  ███ ███  █   █  ███   █", posicionEnX, posicionEnY++);
+            imprimirCentrado("█    █  ███  █  ███  █  ███   █", posicionEnX, posicionEnY++);
             imprimirCentrado(" █                             █", posicionEnX, posicionEnY++);
             imprimirCentrado("█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █", posicionEnX, posicionEnY++);
             imprimirCentrado("████████████████████████████████", posicionEnX, posicionEnY++);
@@ -268,5 +349,3 @@ namespace Totito_Programacion1
         
     }
 }
-
-//a = Console.ReadKey.keychar
